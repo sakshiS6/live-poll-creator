@@ -3,10 +3,9 @@ import { IconCopy } from "@tabler/icons-react";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import WordCloud from "react-d3-cloud";
 import toast from "react-hot-toast";
+import ReactWordcloud from "react-wordcloud";
 import { io } from "socket.io-client";
-import { WordCloudComponent } from "../../../../components/WordCloudComponents";
 
 const words = [
   {
@@ -271,22 +270,21 @@ const words = [
   },
 ];
 
-// const options = {
-//   colors: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"],
-//   enableTooltip: true,
-//   deterministic: false,
-//   fontFamily: "impact",
-//   fontSizes: [5, 60],
-//   fontStyle: "normal",
-//   fontWeight: "normal",
-//   padding: 1,
-//   rotations: 3,
-//   rotationAngles: [0, 90],
-//   scale: "sqrt",
-//   spiral: "archimedean",
-//   transitionDuration: 1000,
-// };
-
+const options = {
+  colors: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"],
+  enableTooltip: true,
+  deterministic: false,
+  fontFamily: "impact",
+  fontSizes: [5, 60],
+  fontStyle: "normal",
+  fontWeight: "normal",
+  padding: 1,
+  rotations: 3,
+  rotationAngles: [0, 90],
+  scale: "sqrt",
+  spiral: "archimedean",
+  transitionDuration: 1000,
+};
 
 const Host = () => {
   const { id } = useParams();
@@ -303,6 +301,7 @@ const Host = () => {
 
   const [roomData, setRoomData] = useState(null);
   const [question, setQuestion] = useState("");
+  const [currentResponse, setCurrentResponse] = useState("");
 
   const copyLink = () => {
     navigator.clipboard
@@ -332,6 +331,10 @@ const Host = () => {
     socket.emit("set-question", { roomName: roomData.title, question });
   };
 
+  socket.on("get-response", (response) => {
+    setCurrentResponse(response);
+  });
+
   if (roomData === null) {
     return <h1>Loading room details...</h1>;
   }
@@ -339,9 +342,11 @@ const Host = () => {
   return (
     <div className="relative min-h-screen bg-violet-300 text-center p-4">
       <h1 className="text-4xl text-white font-bold pt-8">Create a Poll !</h1>
-      <h1 className="text-2xl text-white mt-8">Created By: {roomData.name} </h1>
+      <h1 className="text-2xl text-white mt-4">Created By: {roomData.name} </h1>
 
-      <h1 className="text-3xl block">Title : {roomData.title}</h1>
+      <h1 className="text-3xl block font-bold mt-4">
+        Title : {roomData.title}
+      </h1>
       <label className="text-center px-2 py-2 mt-2 font-bold text-xl w-full">
         Question:
       </label>
@@ -361,51 +366,17 @@ const Host = () => {
         ask question
       </button>
 
-      <button className="flex gap-3 align-items" onClick={copyLink}>
+      <button
+        className=" gap-3 align-items text-black bg-white px-2 py-2 rounded-lg shadow-xl"
+        onClick={copyLink}
+      >
         <IconCopy />
         Copy Link
       </button>
 
-      <div className="flex justify-start gap-8 mt-6 mr-10">
-        <div className="pl-28 pt-2">
-          <input
-            type="text"
-            placeholder="Option 1"
-            className="w-fit px-2 py-1 m-4 rounded-lg border border-gray-300 block"
-          />
-          <input
-            type="text"
-            placeholder="Option 2"
-            className="w-fit px-2 py-1  m-4 rounded-lg border border-gray-300 block"
-          />
-          <input
-            type="text"
-            placeholder="Option 3"
-            className="w-fit px-2 py-1  m-4 rounded-lg border border-gray-300 block"
-          />
-          <input
-            type="text"
-            placeholder="Option 4"
-            className="w-fit px-2 py-1  m-4 rounded-lg border border-gray-300 block"
-          />
-          <button className="px-2 py-1 m-4 text-white bg-violet-700 rounded-md font-bold flex">
-            Add Option
-          </button>
-          <button
-            className="px-3 py-2 text-center text-white bg-violet-700 rounded-md font-semibold mt-2 justify-end w-full"
-            type="submit"
-          >
-            Host a Poll
-          </button>
-        </div>
-
-        {/* <div style={{ height: 400, width: 600 }}>
-          <ReactWordcloud options={options} words={words} />
-        </div> */}
-
-        <div className="">
-          <h1>My Word Cloud</h1>
-          <WordCloudComponent words={words} />
+      <div className="flex justify-center bg-white text-violet-800 w-fit m-2 p-10 align-items rounded-lg">
+        <div style={{ height: 400, width: 600 }}>
+          {/* <ReactWordcloud options={options} words={words} /> */}
         </div>
       </div>
     </div>
