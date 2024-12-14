@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
 const Poll = () => {
@@ -16,10 +17,11 @@ const Poll = () => {
 
   const [roomData, setRoomData] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState("");
+  const [response, setResponse] = useState("")
 
   const fetchRoomData = async () => {
     socket.connect();
-    const res = await axios.put("http://localhost:5000/room/update/" + id);
+    const res = await axios.get("http://localhost:5000/room/getbyid/" + id);
     console.log(res.data);
     setRoomData(res.data);
     const { title } = res.data;
@@ -30,8 +32,9 @@ const Poll = () => {
     fetchRoomData();
   }, [id]);
 
-  const askResponse = () => {
-    socket.emit("set-response", { response: pollInput.currentQuestion,roomName });
+  const sendResponse = () => {
+    socket.emit("send-response", { roomName: roomData.title, response });
+    
   };
 
   socket.on("get-question", (question) => {
@@ -43,15 +46,31 @@ const Poll = () => {
   }
 
   return (
-    <div className="bg-violet-300 text-white h-screen p-4">
+    <div  className="relative min-h-screen bg-violet-300 text-center p-4">
       <h1 className="mt-8 text-4xl ">Question : {currentQuestion}</h1>
+      <div className="flex items-start justify-center gap-8 mt-10">
+          {/* Image Section */}
+          <img
+            src="https://www.questionpro.com/userimages/site_media/online-polls.png"
+            alt="Poll Illustration"
+            className="w-1/6 h-auto "
+          />
+          </div>
+      <label className="flex text-3xl font-bold justify-center mt-20" >Response</label>
       <textarea
         ref={pollInput}
-        className="px-2 py-1 bg-gray-100 w-fit px-3 py-2 rounded-lg text-black text-2xl"
-        placeholder="Enter your selected option"
+        className="mt-2 bg-gray-100 w-[50%] px-3 py-2 rounded-lg text-black text-2xl"
+        placeholder="answer the question"
+        id="response"
+        value={response}
+        onChange={(e) => setResponse(e.target.value)}
+      ></textarea>
+      <button
+        className="block mx-auto font-semibold text-violet-700 bg-white px-2 py-2 mt-4 rounded-lg shadow-xl"
+        onClick={sendResponse}
       >
-      </textarea>
-      <button className="block gap-3 align-items text-violet-900 bg-white px-2 py-2 rounded-lg shadow-xl" onClick={askResponse}>Send Response</button>
+        Send Response
+      </button>
     </div>
   );
 };

@@ -311,7 +311,7 @@ const Host = () => {
       })
       .catch((err) => {
         console.log(err);
-        toast.success("Error occured");
+        toast.error("Error occured");
       });
   };
 
@@ -341,7 +341,7 @@ const Host = () => {
 
   return (
     <div className="relative min-h-screen bg-violet-300 text-center p-4">
-      <h1 className="text-4xl text-white font-bold pt-8">Create a Poll !</h1>
+      <h1 className="text-4xl text-white font-bold pt-4">Create a Poll !</h1>
       <h1 className="text-2xl text-white mt-4">Created By: {roomData.name} </h1>
 
       <h1 className="text-3xl block font-bold mt-4">
@@ -365,16 +365,21 @@ const Host = () => {
       >
         ask question
       </button>
-
       <button
-        className=" gap-3 align-items text-black bg-white px-2 py-2 rounded-lg shadow-xl"
+        className="flex mx-auto gap-3 text-black bg-white px-2 py-2 rounded-lg shadow-xl"
         onClick={copyLink}
       >
         <IconCopy />
         Copy Link
       </button>
+      <h1 className="mt-4 w- px-2 py-2 bg-white text-violet-700 rounded-full w-[50%] mx-auto font-semibold">
+        Response
+      </h1>
+      <label className="w-fit text-white font-bold px-3 py-2 text-2xl border-violet-400 shadow-xl rounded-md">
+        {currentResponse}
+      </label>
 
-      <div className="flex justify-center bg-white text-violet-800 w-fit m-2 p-10 align-items rounded-lg">
+      <div className="mx-auto bg-white text-violet-800 w-fit m-2 p-10 align-items rounded-lg">
         <div style={{ height: 400, width: 600 }}>
           {/* <ReactWordcloud options={options} words={words} /> */}
         </div>

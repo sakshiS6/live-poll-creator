@@ -24,7 +24,10 @@ const ManageSchema = Yup.object().shape({
 const ManageRoom = () => {
   const router = useRouter();
 
-  const fetchRooms = async () => {
+  const [roomList, setRoomList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchRoomList = async () => {
     setLoading(true);
     const res = await axios.get("http://localhost:5000/room/getall");
     console.log(res.data);
@@ -43,10 +46,8 @@ const ManageRoom = () => {
         .post("http://localhost:5000/room/add", values)
         .then((result) => {
           toast.success("Room Created successfully!");
-          toast.success("Now, Create a Poll!");
           resetForm();
-          // router.push("/poll");
-          fetchRooms();
+          fetchRoomList();
         })
         .catch((err) => {
           console.log(err);
@@ -57,13 +58,8 @@ const ManageRoom = () => {
     validationSchema: ManageSchema,
   });
 
-  const [roomList, setRoomList] = useState([]);
-  const [loading, setLoading] = useState(false);
-
- 
-
   useEffect(() => {
-    fetchRooms();
+    fetchRoomList();
   }, []);
 
   const addNewRoom = (e) => {
@@ -83,7 +79,7 @@ const ManageRoom = () => {
 
     const res = await axios.delete(`http://localhost:5000/room/delete/${id}`);
     if (res.status === 200) {
-      fetchRooms();
+      fetchRoomList();
       toast.success("Room Deleted Successfull");
     } else {
       toast.error("Failed to delete room");
@@ -105,15 +101,15 @@ const ManageRoom = () => {
         Create Room
       </button>
       <form onSubmit={manageForm.handleSubmit}>
-        <div className="border-2 bg-white text-black m-2 p-2 rounded-lg w-1/2 mx-auto p-6 m-4 items-center">
-          <h1 className="mb-4 font-bold text-2xl">Create New Room</h1>
-          <label>
+        <div className="border-2 bg-white text-black rounded-lg w-1/3 mx-auto p-8 m-4">
+          <h1 className="mb-4 font-bold text-2xl mx-auto">Create New Room</h1>
+          <label className="mx-auto">
             Give some Title to the room:
             <input
               id="title"
               type="text"
               placeholder="Title..."
-              className="rounded-lg px-2 py-1 border block w-[60%] mb-4"
+              className="rounded-lg px-2 py-1 border block w-full mb-4"
               onChange={manageForm.handleChange}
               value={manageForm.values.title}
             />
@@ -124,7 +120,7 @@ const ManageRoom = () => {
               id="name"
               type="text"
               placeholder="Your Name..."
-              className="rounded-lg px-2 py-1 border block w-[60%] "
+              className="rounded-lg px-2 py-1 border block w-full "
               onChange={manageForm.handleChange}
               value={manageForm.values.name}
             />
@@ -145,13 +141,13 @@ const ManageRoom = () => {
             ) : (
               <IconCheck />
             )}
-            {manageForm.isSubmitting ? "Creating..." : "Create a Room"}
+            {manageForm.isSubmitting ? "Creating..." : "Created a Room"}
           </button>
         </div>
       </form>
 
-      <div className="m-16">
-        <h1 className="text-center font-bold text-3xl">Manage Rooms</h1>
+      <div className="m-12">
+        <h1 className="text-center text-white font-bold text-3xl">Manage Rooms</h1>
         <div className="container mx-auto text-black w-full shadow-xl">
           {loading ? (
             <p className="text-center text-black text-2xl font-bold">
