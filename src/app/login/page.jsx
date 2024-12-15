@@ -9,7 +9,7 @@ const LoginSchema = Yup.object().shape({
   
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
-    .required("Password is required")
+    .required("Password must be correct")
     .matches(/[a-z]/, "Lowercase letter is required")
     .matches(/[A-Z]/, "Uppercase letter is required")
     .matches(/[0-9]/, "number is required")

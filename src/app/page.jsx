@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import Icon from "@/components/Icon";
 import Navbar from "@/components/Navbar";
 import React from "react";
 

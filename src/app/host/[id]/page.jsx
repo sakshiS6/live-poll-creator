@@ -275,11 +275,11 @@ const options = {
   enableTooltip: true,
   deterministic: false,
   fontFamily: "impact",
-  fontSizes: [5, 60],
+  fontSizes: [30, 60],
   fontStyle: "normal",
   fontWeight: "normal",
   padding: 1,
-  rotations: 3,
+  rotations: 2,
   rotationAngles: [0, 90],
   scale: "sqrt",
   spiral: "archimedean",
@@ -294,6 +294,8 @@ const Host = () => {
   );
 
   const [pollLink, setPollLink] = useState("");
+  const [answerList, setAnswerList] = useState([]);
+  const [wordsList, setWordsList] = useState([]);
 
   useEffect(() => {
     socket.connect();
@@ -329,11 +331,34 @@ const Host = () => {
 
   const askQuestion = () => {
     socket.emit("set-question", { roomName: roomData.title, question });
+    toast.success("Question Sended to the Poll")
   };
 
   socket.on("get-response", (response) => {
     setCurrentResponse(response);
+    setAnswerList([...answerList, response]);
+    console.log(answerList);
   });
+
+  useEffect(() => {
+
+    const wordCount = {};
+    answerList.forEach(answer => {
+      if(wordCount[answer]){
+        wordCount[answer] +=1;
+      }else{
+        wordCount[answer] =1;
+      }
+    })
+
+    console.log(wordCount);
+    const temp = Object.keys(wordCount).map(key => {
+      return { text : key, value : wordCount[key] }
+    });
+
+    setWordsList(temp);
+
+  }, [answerList]);
 
   if (roomData === null) {
     return <h1>Loading room details...</h1>;
@@ -343,10 +368,8 @@ const Host = () => {
     <div className="relative min-h-screen bg-violet-300 text-center p-4">
       <h1 className="text-5xl text-black font-bold pt-4">Create a Poll !</h1>
       <div className="bg-white rounded-lg w-[40%] text-violet-900 px-4 py-3 mx-auto mt-4 font-semibold">
-      <h1 className="text-2xl">Created By: {roomData.name} </h1>
-      <h1 className="text-2xl block -bold mt-4">
-        Title : {roomData.title}
-      </h1>
+        <h1 className="text-2xl">Created By: {roomData.name} </h1>
+        <h1 className="text-2xl block -bold mt-4">Title : {roomData.title}</h1>
       </div>
       <label className="text-center px-2 py-2 mt-2 font-bold text-2xl w-full">
         Question:
@@ -373,16 +396,13 @@ const Host = () => {
         <IconCopy />
         Copy Link
       </button>
-      <h1 className="mt-4 w- px-2 py-2 bg-white text-violet-700 rounded-full w-[50%] mx-auto font-semibold">
-        Response
+      <h1 className="mt-4 px-2 py-2 bg-white text-violet-800 rounded-full w-[50%] mx-auto font-semibold">
+        Users Response
       </h1>
-      <label className="w-fit text-white font-bold px-3 py-2 text-2xl border-violet-400 shadow-xl rounded-md">
-        {currentResponse}
-      </label>
 
-      <div className="mx-auto bg-white text-violet-800 w-fit m-2 p-10 align-items rounded-lg">
+      <div className="mx-auto bg-white text-violet-800 w-fit mt-4 p-10 align-items rounded-lg">
         <div style={{ height: 400, width: 600 }}>
-          {/* <ReactWordcloud options={options} words={words} /> */}
+          <ReactWordcloud options={options} words={wordsList} />
         </div>
       </div>
     </div>
