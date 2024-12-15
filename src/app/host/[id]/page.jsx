@@ -341,29 +341,30 @@ const Host = () => {
 
   return (
     <div className="relative min-h-screen bg-violet-300 text-center p-4">
-      <h1 className="text-4xl text-white font-bold pt-4">Create a Poll !</h1>
-      <h1 className="text-2xl text-white mt-4">Created By: {roomData.name} </h1>
-
-      <h1 className="text-3xl block font-bold mt-4">
+      <h1 className="text-5xl text-black font-bold pt-4">Create a Poll !</h1>
+      <div className="bg-white rounded-lg w-[40%] text-violet-900 px-4 py-3 mx-auto mt-4 font-semibold">
+      <h1 className="text-2xl">Created By: {roomData.name} </h1>
+      <h1 className="text-2xl block -bold mt-4">
         Title : {roomData.title}
       </h1>
-      <label className="text-center px-2 py-2 mt-2 font-bold text-xl w-full">
+      </div>
+      <label className="text-center px-2 py-2 mt-2 font-bold text-2xl w-full">
         Question:
       </label>
 
       <input
         type="text"
         placeholder="Write your Poll Question here"
-        className="px-4 py-3 rounded-md border-2 shadow-xl w-[70%] mt-6 text-black"
+        className="px-4 py-3 rounded-md border-2 shadow-xl w-[65%] mt-6 text-black mr-24"
         id="question"
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
       />
       <button
-        className="px-3 py-2 ml-[78%] mt-4 text-white bg-violet-700 rounded-md font-bold flex"
+        className="px-3 py-2 ml-[73%] mt-4 text-white bg-violet-700 rounded-md font-bold flex"
         onClick={askQuestion}
       >
-        ask question
+        Ask Question
       </button>
       <button
         className="flex mx-auto gap-3 text-black bg-white px-2 py-2 rounded-lg shadow-xl"

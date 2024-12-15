@@ -87,8 +87,8 @@ const ManageRoom = () => {
   };
 
   return (
-    <div className="bg-cover min-h-screen bg-violet-300 text-white p-8">
-      <h1 className="text-4xl font-bold text-center pt-10">
+    <div className="bg-cover min-h-screen bg-violet-300 text-black p-8">
+      <h1 className="text-5xl font-bold text-center pt-10">
         Create a Room for the Poll
       </h1>
 
@@ -147,7 +147,7 @@ const ManageRoom = () => {
       </form>
 
       <div className="m-12">
-        <h1 className="text-center text-white font-bold text-3xl">Manage Rooms</h1>
+        <h1 className="text-center text-black font-bold text-4xl">Manage Rooms</h1>
         <div className="container mx-auto text-black w-full shadow-xl">
           {loading ? (
             <p className="text-center text-black text-2xl font-bold">

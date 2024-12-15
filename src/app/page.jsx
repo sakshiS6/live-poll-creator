@@ -1,9 +1,24 @@
-import Image from "next/image";
+import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
+import Navbar from "@/components/Navbar";
+import React from "react";
 
-export default function Home() {
+const Home = () => {
   return (
-    <div >
-      <h1>Home page</h1>
+    <div>
+      <div className="min-h-screen bg-violet-300 text-white p-4">
+        <div>
+          <Navbar />
+        </div >
+        <div>
+        <Hero />
+        </div>
+      </div>
+      <div>
+        <Footer />
+      </div>
     </div>
   );
-}
+};
+
+export default Home;
