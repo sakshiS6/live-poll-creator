@@ -4,12 +4,15 @@ import Icon from "./Icon";
 
 const Navbar = () => {
   return (
-    <div>
+    <div className="bg-violet-300 p-4">
       <>
         {/* ========== HEADER ========== */}
-        <header className="bg-white text-violet-800 rounded-full shadow-xl">
+        <header className="bg-white text-violet-800 rounded-full  ">
           <nav className="relative max-w-[66rem] w-full py-2.5 ps-5 pe-2 md:flex md:items-center md:justify-between md:py-0 mx-2 lg:mx-auto">
-            <div className="text-2xl font-bold"><h1><Icon></Icon>PollCreator</h1></div>
+            
+            <a className="flex gap-2 text-2xl font-bold" href="/">
+              <img src="/poll-icon-10.jpg" width={30} height={30} alt="Icon"/>
+              PollCreator</a>
             {/* Collapse */}
             <div
               id="hs-navbar-floating-dark"
@@ -19,7 +22,7 @@ const Navbar = () => {
               <div className="flex flex-col md:flex-row md:items-center md:justify-end py-2 md:py-0 md:ps-7">
                 <Link
                   className="p-3 ps-px sm:px-3 md:py-4 text-md text-violet-800 hover:text-neutral-500 focus:outline-none focus:text-neutral-300"
-                  href="../templates/agency/index.html"
+                  href="/"
                   aria-current="page"
                 >
                   Home

@@ -8,16 +8,12 @@ const Home = () => {
   return (
     <div>
       <div className="min-h-screen bg-violet-300 text-white p-4">
-        <div>
-          <Navbar />
-        </div >
+        
         <div>
         <Hero />
         </div>
       </div>
-      <div>
-        <Footer />
-      </div>
+      
     </div>
   );
 };

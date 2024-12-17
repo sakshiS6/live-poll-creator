@@ -177,7 +177,7 @@ const ManageRoom = () => {
                         {room.name}
                       </td>
                       <td className="p-2 border border-gray-400">
-                        {room.createdAt}
+                        {new Date(room.createdAt).toDateString()}
                       </td>
                       <td className="p-2 border border-gray-400">
                         <Link
