@@ -3,7 +3,6 @@ import {
   IconCheck,
   IconDoorEnter,
   IconLoader3,
-  IconSquarePlus,
   IconTrash,
 } from "@tabler/icons-react";
 import * as Yup from "yup";
@@ -63,17 +62,7 @@ const ManageRoom = () => {
     fetchRoomList();
   }, []);
 
-  const addNewRoom = (e) => {
-    console.log(e.target.value);
-
-    const newRoom = {
-      name: manageForm.values.name,
-      title: manageForm.values.title,
-    };
-
-    setRoomList([newRoom, ...roomList]);
-    manageForm.resetForm();
-  };
+  
 
   const deleteRoom = async (id) => {
     if (!confirm("Are you sure you want to delete this room")) return;
@@ -88,8 +77,8 @@ const ManageRoom = () => {
   };
 
   return (
-    <div className="bg-cover min-h-screen bg-violet-300 text-black p-8">
-      <h1 className="text-5xl font-bold text-center text-gray-800 dark:text-neutral-400 ">
+    <div className="bg-cover min-h-screen bg-violet-300 text-black pt-4 p-8">
+      <h1 className="text-5xl font-bold text-center text-gray-900 dark:text-neutral-400 ">
         Create a Room for the Poll
       </h1>
       <p className="text-xl p-1 font-semibold text-center text-gray-900 dark:text-neutral-400 ">

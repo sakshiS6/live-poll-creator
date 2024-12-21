@@ -296,6 +296,8 @@ const Host = () => {
   const [pollLink, setPollLink] = useState("");
   const [answerList, setAnswerList] = useState([]);
   const [wordsList, setWordsList] = useState([]);
+  const [waiting,setWaiting]=useState(false);
+  
 
   useEffect(() => {
     socket.connect();
@@ -331,7 +333,7 @@ const Host = () => {
 
   const askQuestion = () => {
     socket.emit("set-question", { roomName: roomData.title, question });
-    toast.success("Question Sended to the Poll")
+    toast.success("Question Sended to the Poll");
   };
 
   socket.on("get-response", (response) => {
@@ -341,23 +343,23 @@ const Host = () => {
   });
 
   useEffect(() => {
-
     const wordCount = {};
-    answerList.forEach(answer => {
-      if(wordCount[answer]){
-        wordCount[answer] +=1;
-      }else{
-        wordCount[answer] =1;
+    setWaiting(true);
+    answerList.forEach((answer) => {
+      if (wordCount[answer]) {
+        wordCount[answer] += 1;
+      } else {
+        wordCount[answer] = 1;
       }
-    })
+      setWaiting(false);
+    });
 
     console.log(wordCount);
-    const temp = Object.keys(wordCount).map(key => {
-      return { text : key, value : wordCount[key] }
+    const temp = Object.keys(wordCount).map((key) => {
+      return { text: key, value: wordCount[key] };
     });
 
     setWordsList(temp);
-
   }, [answerList]);
 
   if (roomData === null) {
@@ -365,45 +367,226 @@ const Host = () => {
   }
 
   return (
-    <div className="relative min-h-screen bg-violet-300 text-center p-4">
-      <h1 className="text-5xl text-black font-bold pt-4">Create a Poll !</h1>
-      <div className="bg-white rounded-lg w-[40%] text-violet-900 px-4 py-3 mx-auto mt-4 font-semibold">
-        <h1 className="text-2xl">Created By: {roomData.name} </h1>
-        <h1 className="text-2xl block -bold mt-4">Title : {roomData.title}</h1>
-      </div>
-      <label className="text-center px-2 py-2 mt-2 font-bold text-2xl w-full">
-        Question:
-      </label>
+    <div className="relative min-h-screen bg-violet-300 text-center p-4 ">
+      <h1 className="text-5xl text-black font-bold ">Create a Poll !</h1>
+      <div className="bg-white flex rounded-lg mt-6">
+        <div className="w-1/2 ">
+          <div className="bg-violet-200 m-6 rounded-lg text-gray-900 px-4 py-3 font-semibold">
+            <h1 className="text-2xl">Room Name : {roomData.title}</h1>
+            <h1 className="text-2xl mt-4">Created By: {roomData.name} </h1>
+          </div>
 
-      <input
-        type="text"
-        placeholder="Write your Poll Question here"
-        className="px-4 py-3 rounded-md border-2 shadow-xl w-[65%] mt-6 text-black mr-24"
-        id="question"
-        value={question}
-        onChange={(e) => setQuestion(e.target.value)}
-      />
-      <button
-        className="px-3 py-2 ml-[73%] mt-4 text-white bg-violet-700 rounded-md font-bold flex"
-        onClick={askQuestion}
-      >
-        Ask Question
-      </button>
-      <button
-        className="flex mx-auto gap-3 text-black bg-white px-2 py-2 rounded-lg shadow-xl"
-        onClick={copyLink}
-      >
-        <IconCopy />
-        Copy Link
-      </button>
-      <h1 className="mt-4 px-2 py-2 bg-white text-violet-800 rounded-full w-[50%] mx-auto font-semibold">
-        Users Response
-      </h1>
+          <p className="text-lg font-semibold text-black p-2">
+            Click to Copy the Poll Link and Share it to your Audience
+          </p>
+          <button
+            className="flex gap-3 text-white bg-black px-3 mx-auto py-3 rounded-lg shadow-xl"
+            onClick={copyLink}
+          >
+            <IconCopy />
+            Copy Link
+          </button>
 
-      <div className="mx-auto bg-white text-violet-800 w-fit mt-4 p-10 align-items rounded-lg">
-        <div style={{ height: 400, width: 600 }}>
-          <ReactWordcloud options={options} words={wordsList} />
+          <label className="text-center text-violet-800 px-2 py-2 mt-6 font-bold text-2xl w-full block">
+            What would you like to ask your audience?
+          </label>
+
+          <input
+            type="text"
+            placeholder="Type your question here..."
+            className="px-4 py-3 bg-gray-200 rounded-md border-2 shadow-xl w-[35rem] block mx-auto text-black"
+            id="question"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+          />
+          <button
+            className="px-3 py-2 mt-4 text-white text-lg bg-violet-700 rounded-md font-bold"
+            onClick={askQuestion}
+          >
+            Send Question
+          </button>
         </div>
+
+        <div className="bg-violet-200 text-violet-800 w-1/2 m-4 p-4 align-items rounded-lg">
+        {waiting ? (
+          <div className=" ">
+            <p className="font-semibold text-2xl p-2">Waiting for the reponse from the Audience...</p>
+            <img src="/ques.png" alt="waiting" className="rounded-full mx-auto bg-black" width={360} />
+          </div> 
+        ):(
+          <div>
+            <h1 className="px-2 py-2 bg-white text-violet-800 rounded-lg w-1/3 mx-auto font-semibold">
+              Audience Response
+            </h1>
+            <div
+              style={{ height: 350, width: 590 }}
+              className="bg-white p-2 rounded-lg mt-2"
+            >
+              <ReactWordcloud options={options} words={wordsList} />
+            </div>
+          </div>
+        )}
+        </div>
+      </div>
+
+      <div>
+        {/* Features */}
+        <div className=" px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+          <div className="max-w-7xl mx-auto rounded-lg shadow-md">
+            <video
+              className="w-full h-auto rounded-lg shadow-lg"
+              src="/Video.mp4"
+              alt="Features Image"
+              muted
+              loop
+              autoPlay
+              controls
+            />
+          </div>
+          {/* Grid */}
+          <div className="mt-4 p-6 rounded-lg lg:mt-16 grid lg:grid-cols-3 gap-8 lg:gap-12 bg-white text-black">
+            <div className="lg:col-span-1">
+              <h2 className="font-bold text-2xl mt-8 md:text-3xl text-gray-800 dark:text-neutral-200">
+                From Setup to Word Cloud: Polling Made Easy
+              </h2>
+              <p className="mt-6 md:mt-4 text-gray-500 text-center dark:text-neutral-500">
+                Getting started with your live poll is simple! Follow these easy
+                steps to engage your audience and watch the results come to
+                life. Running a live poll on our platform is simple,
+                interactive, and effective. Follow these steps to create an
+                engaging experience for your audience.
+              </p>
+            </div>
+            {/* End Col */}
+            <div className="lg:col-span-2">
+              <div className="grid sm:grid-cols-2 gap-8 md:gap-12">
+                {/* Icon Block */}
+                <div className="flex gap-x-5">
+                  <svg
+                    className="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={24}
+                    height={24}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <rect width={18} height={10} x={3} y={11} rx={2} />
+                    <circle cx={12} cy={5} r={2} />
+                    <path d="M12 7v4" />
+                    <line x1={8} x2={8} y1={16} y2={16} />
+                    <line x1={16} x2={16} y1={16} y2={16} />
+                  </svg>
+                  <div className="grow">
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                      Set the Question
+                    </h3>
+                    <p className="mt-1 text-gray-600 dark:text-neutral-400">
+                      Define the question you want to ask your audience. Be
+                      creative and clear to get engaging responses.
+                    </p>
+                  </div>
+                </div>
+                {/* End Icon Block */}
+                {/* Icon Block */}
+                <div className="flex gap-x-5">
+                  <svg
+                    className="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={24}
+                    height={24}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M7 10v12" />
+                    <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z" />
+                  </svg>
+                  <div className="grow">
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                      Copy & Share the Link
+                    </h3>
+                    <p className="mt-1 text-gray-600 dark:text-neutral-400">
+                      Once your question is set, copy the unique poll link and
+                      share it with your audience. You can distribute the link
+                      through email, social media, or messaging platforms.
+                    </p>
+                  </div>
+                </div>
+                {/* End Icon Block */}
+                {/* Icon Block */}
+                <div className="flex gap-x-5 ">
+                  <svg
+                    className="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={24}
+                    height={24}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                  </svg>
+                  <div className="grow">
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                      Wait for Responses
+                    </h3>
+                    <p className="mt-1 text-gray-600 dark:text-neutral-400">
+                      Sit back and watch as responses start pouring in. Your
+                      audience will send one-word answers to your question.
+                    </p>
+                  </div>
+                </div>
+                {/* End Icon Block */}
+                {/* Icon Block */}
+                <div className="flex gap-x-5">
+                  <svg
+                    className="shrink-0 mt-1 size-6 text-blue-600 dark:text-blue-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={24}
+                    height={24}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx={9} cy={7} r={4} />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  <div className="grow">
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                      View the Word Cloud
+                    </h3>
+                    <p className="mt-1 text-gray-600 dark:text-neutral-400">
+                      As the responses come in, they will dynamically appear as
+                      a word cloud. The more frequent words will be highlighted,
+                      creating a visual representation of your audience’s
+                      answers.
+                    </p>
+                  </div>
+                </div>
+                {/* End Icon Block */}
+              </div>
+            </div>
+            {/* End Col */}
+          </div>
+          {/* End Grid */}
+        </div>
+        {/* End Features */}
       </div>
     </div>
   );

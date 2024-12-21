@@ -10,9 +10,10 @@ const Navbar = () => {
         <header className="bg-white w-[70rem] text-violet-800 rounded-full  mx-auto">
           <nav className="relative max-w-[66rem] w-full py-2.5 ps-5 pe-2 md:flex md:items-center md:justify-between md:py-0 mx-2 lg:mx-auto">
             
-            <Link className="flex gap-2 text-2xl font-bold" href="/">
-              <img src="/poll-icon-10.jpg" width={40} height={40} alt="Icon"/>
-              PollCreator</Link>
+            <Link className="flex gap-x-2 text-2xl font-bold " href="/">
+              <img src="/icon.png" width={40} alt="Icon" className="bg-violet-600 rounded-full p-1"/>
+            </Link>
+            <h1 className="text-xl font-bold gap-2">Pollify</h1>
             {/* Collapse */}
             <div
               id="hs-navbar-floating-dark"
