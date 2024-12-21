@@ -371,14 +371,19 @@ const Hero = () => {
                   <ReactWordcloud options={options} words={words} />
                 </div>
               </div>
-              <div className="relative w-fit text-black mt-8 p-4 ml-16">
+              <div className="relative w-fit text-black mt-16 p-4  ml-16">
                 <h1 className="text-3xl text-center font-bold text-violet-800">
                   Word Cloud
                 </h1>
-                <p className="text-xl text-center p-8">
+                <p className="text-lg text-gray-700 dark:text-neutral-400 text-center p-2 pt-8">
                   Create WordCloud to highlight popular poll responses. They’re
                   great for gathering input and wowing your classroom, meeting,
-                  and workshop audiences!
+                  and workshop audiences! A word cloud is commonly used for
+                  text analysis and data visualization, word clouds are
+                  effective in summarizing large amounts of information into a
+                  compact, artistic format. They highlight key themes or trends,
+                  making them useful in various fields, including marketing,
+                  education, social media analysis, and software development.
                 </p>
               </div>
             </div>
@@ -394,8 +399,8 @@ const Hero = () => {
                         You can ask Question
                       </h1>
                       <p className="mt-3 text-lg text-gray-800 dark:text-neutral-400">
-                        Introducing a new way for your Question to ask from Audience and to reach the
-                        creative community.
+                        Introducing a new way for your Question to ask from
+                        Audience and to reach the creative community.
                       </p>
                       <div className="mt-5 lg:mt-8 flex flex-col items-center gap-2 sm:flex-row sm:gap-3">
                         <div className="w-full sm:w-auto">
