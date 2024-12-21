@@ -19,6 +19,7 @@ const ManageSchema = Yup.object().shape({
     .min(2, "Too Short!")
     .max(50, "Too Long!")
     .required("Name is required"),
+  title: Yup.string().required("Title is required"),
 });
 
 const ManageRoom = () => {
@@ -124,6 +125,11 @@ const ManageRoom = () => {
                   value={manageForm.values.title}
                 />
               </label>
+              {manageForm.errors.title && manageForm.touched.title && (
+                <p className=" text-xs text-red-600 mt-2" id="title-error">
+                  {manageForm.errors.title}
+                </p>
+              )}
               <label className="font-semibold text-lg">
                 Creator's name:
                 <input
