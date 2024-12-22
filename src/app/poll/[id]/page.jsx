@@ -78,7 +78,7 @@ const Poll = () => {
           <p className="p-2 text-xl font-semibold text-gray-900 dark:text-neutral">Respond with one word to add your voice to the poll. Let your word shape the conversation!</p>
           <textarea
             // ref={pollInput}
-            className="mt-2 bg-gray-100 w-fit px-5 py-4 rounded-lg text-black text-2xl w-2/3 h-auto"
+            className="mt-2 bg-gray-100 w-[75%] px-5 py-4 rounded-lg text-black text-2xl w-2/3 h-auto"
             placeholder="Type here..."
             id="response"
             value={response}
