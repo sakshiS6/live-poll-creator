@@ -92,7 +92,7 @@ const ManageRoom = () => {
         <IconSquarePlus />
         Create Room
       </button> */}
-      <div className="bg-gray-200 w-full mt-6 p-8 rounded-lg flex ">
+      <div className="bg-gray-100 w-full mt-6 p-8 rounded-lg flex ">
         <div className="text-gray-800 dark:text-neutral-400  w-[45rem] p-8">
           <form onSubmit={manageForm.handleSubmit}>
             <div className="mx-auto items-center rounded-xl p-4 ">
@@ -151,7 +151,7 @@ const ManageRoom = () => {
             </div>
           </form>
         </div>
-        <div className="w-[55rem] bg-gray-200">
+        <div className="w-[55rem] bg-gray-100">
           <img src="/ManageRoom.png" alt="Poll" className="w-full h-full" />
         </div>
       </div>
@@ -178,7 +178,7 @@ const ManageRoom = () => {
                   <th className="p-2">Room Title</th>
                   <th className="p-2">Created By</th>
                   <th className="p-2">Created At</th>
-                  <th className="p-2">Views</th>
+                  <th className="p-2">SetQuestion</th>
                   <th className="p-2">Delete</th>
                 </tr>
               </thead>
