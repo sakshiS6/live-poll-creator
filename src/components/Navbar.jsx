@@ -11,9 +11,9 @@ const Navbar = () => {
           <nav className="relative max-w-[66rem] w-full py-2.5 ps-5 pe-2 md:flex md:items-center md:justify-between md:py-0 mx-2 lg:mx-auto">
             
             <Link className="flex gap-x-2 text-2xl font-bold " href="/">
-              <img src="/icon.png" width={40} alt="Icon" className="bg-violet-600 rounded-full p-1"/>
+              <img src="/icon.png" width={55} alt="Icon" className="bg-violet-600 rounded-full p-1"/>
             </Link>
-            <h1 className="text-xl font-bold gap-2">Pollify</h1>
+            <h1 className="text-xl font-bold m-2">CloudStream</h1>
             {/* Collapse */}
             <div
               id="hs-navbar-floating-dark"

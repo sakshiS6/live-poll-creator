@@ -288,8 +288,8 @@ const Hero = () => {
     <div>
       <>
         {/* Hero */}
-        <div className="bg-white mt-2 rounded-lg">
-          <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10 ">
+        <div className="bg-white mt-1 rounded-lg">
+          <div className="max-w-[85rem] mx-auto sm:px-6 lg:px-8 py-12 px-8 ">
             {/* Announcement Banner */}
             <div className="flex justify-center">
               <Link
