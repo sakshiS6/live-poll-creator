@@ -1,10 +1,11 @@
-import { Inter } from "next/font/google";
+import { Outfit , Ovo } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ["latin"] , weight: ["400" ,"500" ,"600" ,"700"]});
+const ovo = Ovo({ subsets: ["latin"] , weight: ["400"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -15,7 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={inter.className}
+        className={`${outfit.className} ${ovo.className} antialiased`}
       >
         
           <Navbar />
