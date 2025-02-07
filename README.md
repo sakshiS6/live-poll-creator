@@ -28,5 +28,5 @@ CloudStream is a real-time poll creation platform built using the **MERN stack**
 
 ### 1️⃣ Clone the repository  
 ```bash
-git clone https://github.com/your-username/CloudStream.git
+git clone https://github.com/sakshiS6/CloudStream.git
 cd CloudStream
