@@ -39,24 +39,28 @@ CloudStream is a real-time poll creation platform built using the **MERN stack**
 
 
 
-📌 How to Use-
+📌 How to Use
+1️⃣ Open the website and create a new room.
 
-1️⃣ Open the website and create a new poll
-2️⃣ Share the poll link with participants
-3️⃣ See live voting updates
-4️⃣ Close the poll and view final results
+2️⃣ Enter the room and share the poll link with participants.
+
+3️⃣ Set your question and wait for participants to respond.
+
+4️⃣ View responses in a live Word Cloud format.
 
 
 🔥 Future Enhancements-
   ◾ User authentication for poll management
+  
   ◾ Custom themes for polls
+  
   ◾ Poll analytics and export options
 
 
 🤝 Contributor-
    Sakshi Mishra ( https://github.com/sakshiS6 )
 
-### 1️⃣ Clone the repository  
+### Clone the repository  
 ```bash
 git clone https://github.com/sakshiS6/CloudStream.git
 cd CloudStream
