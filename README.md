@@ -11,8 +11,7 @@ CloudStream is a real-time poll creation platform built using the **MERN stack**
 ---
 
 ## 📸 Project Screenshot  
-![CloudStream Screenshot](screenshot.png)  
-(*Replace `screenshot.png` with your actual image filename*)  
+![CloudStream Screenshot](Screenshot1.png)   
 
 ---
 
