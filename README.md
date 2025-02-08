@@ -11,7 +11,21 @@ CloudStream is a real-time poll creation platform built using the **MERN stack**
 ---
 
 ## 📸 Project Screenshot  
-![CloudStream Screenshot](Screenshot1.png)   
+![CloudStream Screenshot](Screenshot1.png)  
+![CloudStream Screenshot](Screenshot2.png)
+![CloudStream Screenshot](Screenshot3.png)
+![CloudStream Screenshot](Screenshot4.png)
+![CloudStream Screenshot](Screenshot5.png)
+![CloudStream Screenshot](Screenshot6.png)
+![CloudStream Screenshot](Screenshot7.png)
+![CloudStream Screenshot](Screenshot8.png)
+![CloudStream Screenshot](Screenshot9.png)
+![CloudStream Screenshot](Screenshot10.png)
+![CloudStream Screenshot](Screenshot11.png)
+![CloudStream Screenshot](Screenshot12.png)
+![CloudStream Screenshot](Screenshot13.png)
+![CloudStream Screenshot](Screenshot14.png)
+![CloudStream Screenshot](Screenshot15.png)
 
 ---
 
