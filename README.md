@@ -39,7 +39,8 @@ CloudStream is a real-time poll creation platform built using the **MERN stack**
 
 
 
-📌 How to Use
+📌 How to Use-
+
 1️⃣ Open the website and create a new room.
 
 2️⃣ Enter the room and share the poll link with participants.
@@ -50,6 +51,7 @@ CloudStream is a real-time poll creation platform built using the **MERN stack**
 
 
 🔥 Future Enhancements-
+
   ◾ User authentication for poll management
   
   ◾ Custom themes for polls
