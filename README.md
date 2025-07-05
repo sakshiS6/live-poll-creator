@@ -11,22 +11,22 @@ CloudStream is a real-time poll creation platform built using the **MERN stack**
 ---
 
 ## 📸 Project Screenshot  
-![CloudStream Screenshot](Screenshot1.png)  
-![CloudStream Screenshot](Screenshot2.png)
-![CloudStream Screenshot](Screenshot3.png)
-![CloudStream Screenshot](Screenshot4.png)
-![CloudStream Screenshot](Screenshot5.png)
-![CloudStream Screenshot](Screenshot6.png)
-![CloudStream Screenshot](Screenshot7.png)
-![CloudStream Screenshot](Screenshot8.png)
-![CloudStream Screenshot](Screenshot9.png)
-![CloudStream Screenshot](Screenshot10.png)
-![CloudStream Screenshot](Screenshot11.png)
-![CloudStream Screenshot](Screenshot12.png)
-![CloudStream Screenshot](Screenshot13.png)
-![CloudStream Screenshot](Screenshot14.png)
-![CloudStream Screenshot](Screenshot15.png)
-![CloudStream Screenshot](Screenshot16.png)
+![CloudStream Screenshot](Navbar.png)  
+![CloudStream Screenshot](Home1.png)
+![CloudStream Screenshot](Home2.png)
+![CloudStream Screenshot](Footer.png)
+![CloudStream Screenshot](Signup.png)
+![CloudStream Screenshot](Login.png)
+![CloudStream Screenshot](CreateRoom1.png)
+![CloudStream Screenshot](CreateRoom2.png)
+![CloudStream Screenshot](ManageRoom.png)
+![CloudStream Screenshot](Host1.png)
+![CloudStream Screenshot](Host2.png)
+![CloudStream Screenshot](Host3.png)
+![CloudStream Screenshot](Poll1.png)
+![CloudStream Screenshot](Poll2.png)
+![CloudStream Screenshot](Response.png)
+![CloudStream Screenshot](Contact.png)
 
 
 ---
