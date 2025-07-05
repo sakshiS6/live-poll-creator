@@ -316,7 +316,7 @@ const Hero = () => {
 
             <div className="mt-6 max-w-2xl text-center mx-auto">
               <h1 className="block font-bold text-gray-800 text-4xl md:text-5xl lg:text-6xl dark:text-neutral-200">
-                Let's Create
+                Let&apos;s Create
                 <span className="bg-clip-text bg-gradient-to-tl from-violet-800 to-violet-600 text-transparent">
                   Poll
                 </span>

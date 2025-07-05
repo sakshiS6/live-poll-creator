@@ -108,7 +108,7 @@ const ManageRoom = () => {
               </h1>
 
               <label className="text-lg text-black">
-                Give some Title to the room:
+                Title of the room:
                 <input
                   id="title"
                   type="text"
@@ -126,7 +126,7 @@ const ManageRoom = () => {
 
               {/* Name Input */}
               <label className="text-lg text-black">
-                Creator's name:
+                Name of the Creator:
                 <input
                   id="name"
                   type="text"
