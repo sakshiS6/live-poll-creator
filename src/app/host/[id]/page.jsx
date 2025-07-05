@@ -308,7 +308,7 @@ const Host = () => {
 
   const copyLink = () => {
     navigator.clipboard
-      .writeText("https://live-poll-backend-akq0.onrender.com/poll/" + id)
+      .writeText("https://live-poll-creator.vercel.app/poll/" + id)
       .then((result) => {
         toast.success("Link copied");
       })
