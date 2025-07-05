@@ -167,8 +167,9 @@ const ManageRoom = () => {
         </p>
         <div className="container mx-auto text-black w-full shadow-xl">
           {loading ? (
-            <p className="text-center text-black text-6xl text-2xl font-bold mt-4">
+            <p className="text-center text-black text-4xl font-bold mt-4">
               Loading... Please Wait
+              <IconLoader3 className="animate-spin mx-auto font-bold" />
             </p>
           ) : (
             <table className="mt-4 p-10 w-full">
@@ -201,7 +202,7 @@ const ManageRoom = () => {
                           className="bg-violet-500 flex w-fit text-white px-2 py-1 rounded-full mx-auto gap-2"
                           href={"/host/" + room._id}
                         >
-                          Enter to the Room
+                          Enter to {room.title}
                           <IconDoorEnter />
                         </Link>
                       </td>
@@ -212,7 +213,7 @@ const ManageRoom = () => {
                             deleteRoom(room._id);
                           }}
                         >
-                          Delete this Room
+                          Delete {room.title}
                           <IconTrash />
                         </button>
                       </td>
