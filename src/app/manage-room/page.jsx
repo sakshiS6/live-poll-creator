@@ -62,8 +62,6 @@ const ManageRoom = () => {
     fetchRoomList();
   }, []);
 
-  
-
   const deleteRoom = async (id) => {
     if (!confirm("Are you sure you want to delete this room")) return;
 
@@ -92,52 +90,61 @@ const ManageRoom = () => {
         <IconSquarePlus />
         Create Room
       </button> */}
-      <div className="bg-gray-100 w-full mt-6 p-8 rounded-lg flex ">
-        <div className="text-gray-800 dark:text-neutral-400  w-[45rem] p-8">
+      <div className="bg-gray-100 w-full mt-6 p-4 rounded-lg flex flex-col md:flex-row gap-6">
+        {/* Form Section */}
+        <div className="text-gray-800 md:w-1/2 p-8">
           <form onSubmit={manageForm.handleSubmit}>
-            <div className="mx-auto items-center rounded-xl p-4 ">
-              <h1 className="font-bold text-4xl mb-4 text-center">
+            <div className="mx-auto items-center rounded-xl p-4">
+              <h1 className="font-bold text-3xl mb-4 text-center">
                 Create Room
                 <p className="text-lg font-semibold p-1">
-                  Ready to Host? Create a Room and Connect with Your Audience...
+                  Ready to Host? Create Room & Connect with Your Audience...
                 </p>
-                <img src="/Vote.png" alt="Poll" className="rounded-lg" />
+                <img
+                  src="/Vote.png"
+                  alt="Poll"
+                  className="rounded-lg w-1/2 mx-auto hidden sm:block"
+                />
               </h1>
-              <label className="font-semibold text-lg">
+
+              <label className="text-lg text-black">
                 Give some Title to the room:
                 <input
                   id="title"
                   type="text"
                   placeholder="Title..."
-                  className="rounded-lg px-3 py-2 border block w-full mb-4 bg-gray-100"
+                  className="rounded-lg px-3 py-2 border block w-full mb-4 bg-gray-200"
                   onChange={manageForm.handleChange}
                   value={manageForm.values.title}
                 />
               </label>
               {manageForm.errors.title && manageForm.touched.title && (
-                <p className=" text-xs text-red-600 mt-2" id="title-error">
+                <p className="text-xs text-red-600 mt-2">
                   {manageForm.errors.title}
                 </p>
               )}
-              <label className="font-semibold text-lg">
+
+              {/* Name Input */}
+              <label className="text-lg text-black">
                 Creator's name:
                 <input
                   id="name"
                   type="text"
                   placeholder="Your Name..."
-                  className="rounded-lg px-3 py-2 border block w-full bg-gray-100"
+                  className="rounded-lg px-3 py-2 border block w-full bg-gray-200"
                   onChange={manageForm.handleChange}
                   value={manageForm.values.name}
                 />
               </label>
               {manageForm.errors.name && manageForm.touched.name && (
-                <p className=" text-xs text-red-600 mt-2" id="name-error">
+                <p className="text-xs text-red-600 mt-2">
                   {manageForm.errors.name}
                 </p>
               )}
 
+              {/* Submit Button */}
               <button
-                className="bg-green-600 text-white px-2 py-2 rounded-xl mt-4 flex items-center justify-center w-full gap-2"
+                className="bg-green-600 text-white px-3 py-2 rounded-xl mt-4 flex items-center justify-center w-full gap-2"
                 type="submit"
                 disabled={manageForm.isSubmitting}
               >
@@ -146,15 +153,22 @@ const ManageRoom = () => {
                 ) : (
                   <IconCheck />
                 )}
-                {manageForm.isSubmitting ? "Creating..." : "Created a Room"}
+                {manageForm.isSubmitting ? "Creating..." : "Create a Room"}
               </button>
             </div>
           </form>
         </div>
-        <div className="w-[55rem] bg-gray-100">
-          <img src="/ManageRoom.png" alt="Poll" className="w-full h-full" />
+
+        {/* Image Section */}
+        <div className="w-full md:w-1/2">
+          <img
+            src="/ManageRoom.png"
+            alt="Poll"
+            className="w-full h-full rounded-lg"
+          />
         </div>
       </div>
+
       {/* Manage Room */}
       <div className="mt-12">
         <h1 className="text-center text-gray-900 dark:text-neutral-400 font-bold text-4xl">
@@ -165,66 +179,58 @@ const ManageRoom = () => {
           Quick Access to Your Poll Room Details. View, Enter, or Delete Your
           Poll Room
         </p>
-        <div className="container mx-auto text-black w-full shadow-xl">
-          {loading ? (
-            <p className="text-center text-black text-4xl font-bold mt-4">
-              Loading... Please Wait
-              <IconLoader3 className="animate-spin mx-auto font-bold" />
-            </p>
-          ) : (
-            <table className="mt-4 p-10 w-full">
-              <thead className="border border-violet-700 text-white bg-violet-900 ">
-                <tr>
-                  <th className="p-2">Room Id</th>
-                  <th className="p-2">Room Title</th>
-                  <th className="p-2">Created By</th>
-                  <th className="p-2">Created At</th>
-                  <th className="p-2">SetQuestion</th>
-                  <th className="p-2">Delete</th>
+      <div className="container mx-auto text-black w-full shadow-xl overflow-x-auto">
+        {loading ? (
+          <p className="text-center text-black text-4xl font-bold mt-4">
+            Loading... Please Wait
+            <IconLoader3 className="animate-spin mx-auto font-bold" />
+          </p>
+        ) : (
+          <table className="mt-4 min-w-full ">
+            <thead className="border border-violet-700 text-white bg-violet-900">
+              <tr>
+                <th className="p-2">Room Id</th>
+                <th className="p-2">Room Title</th>
+                <th className="p-2">Created By</th>
+                <th className="p-2">Created At</th>
+                <th className="p-2">Set Question</th>
+                <th className="p-2">Delete</th>
+              </tr>
+            </thead>
+            <tbody className="bg-gray-100 text-center">
+              {roomList.map((room) => (
+                <tr key={room._id} className="border border-gray-200">
+                  <td className="p-2 border">{room._id}</td>
+                  <td className="p-2 border">{room.title}</td>
+                  <td className="p-2 border">{room.name}</td>
+                  <td className="p-2 border">
+                    {new Date(room.createdAt).toDateString()}
+                  </td>
+                  <td className="p-2 border">
+                    <Link
+                      className="bg-violet-500 flex w-fit text-white px-2 py-1 rounded-full mx-auto gap-2"
+                      href={"/host/" + room._id}
+                    >
+                      Enter to {room.title}
+                      <IconDoorEnter />
+                    </Link>
+                  </td>
+                  <td className="p-2 border">
+                    <button
+                      className="bg-red-500 flex w-fit text-white px-2 py-1 rounded-full mx-auto gap-2"
+                      onClick={() => deleteRoom(room._id)}
+                    >
+                      Delete {room.title}
+                      <IconTrash />
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody className="bg-gray-100 text-center">
-                {roomList.map((room) => {
-                  return (
-                    <tr key={room._id} className="border border-gray-200">
-                      <td className="p-2 border border-gray-400">{room._id}</td>
-                      <td className="p-2 border border-gray-400">
-                        {room.title}
-                      </td>
-                      <td className="p-2 border border-gray-400">
-                        {room.name}
-                      </td>
-                      <td className="p-2 border border-gray-400">
-                        {new Date(room.createdAt).toDateString()}
-                      </td>
-                      <td className="p-2 border border-gray-400">
-                        <Link
-                          className="bg-violet-500 flex w-fit text-white px-2 py-1 rounded-full mx-auto gap-2"
-                          href={"/host/" + room._id}
-                        >
-                          Enter to {room.title}
-                          <IconDoorEnter />
-                        </Link>
-                      </td>
-                      <td className="p-2 border border-gray-400">
-                        <button
-                          className="bg-red-500 flex w-fit text-white px-2 py-1 rounded-full mx-auto gap-2"
-                          onClick={() => {
-                            deleteRoom(room._id);
-                          }}
-                        >
-                          Delete {room.title}
-                          <IconTrash />
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          )}
-        </div>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
+    </div>
     </div>
   );
 };

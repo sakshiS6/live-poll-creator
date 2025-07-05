@@ -296,8 +296,7 @@ const Host = () => {
   const [pollLink, setPollLink] = useState("");
   const [answerList, setAnswerList] = useState([]);
   const [wordsList, setWordsList] = useState([]);
-  const [waiting,setWaiting]=useState(false);
-  
+  const [waiting, setWaiting] = useState(false);
 
   useEffect(() => {
     socket.connect();
@@ -367,65 +366,76 @@ const Host = () => {
   }
 
   return (
-    <div className="relative min-h-screen bg-violet-300 text-center p-4 ">
-      <h1 className="text-5xl text-black font-bold ">Create a Poll !</h1>
-      <div className="bg-white flex rounded-lg mt-6">
-        <div className="w-1/2 ">
-          <div className="bg-violet-200 m-6 rounded-lg text-gray-900 px-4 py-3 font-semibold">
-            <h1 className="text-2xl">Room Name : {roomData.title}</h1>
-            <h1 className="text-2xl mt-4">Created By: {roomData.name} </h1>
+    <div className="relative min-h-screen bg-violet-300 text-center p-4">
+      <h1 className="text-3xl md:text-5xl text-black font-bold">
+        Create a Poll!
+      </h1>
+
+      <div className="bg-white flex flex-col lg:flex-row rounded-lg mt-6 gap-6">
+        <div className="w-full lg:w-1/2">
+          <div className="bg-violet-200 m-4 md:m-6 rounded-lg text-gray-900 px-4 py-3 font-semibold">
+            <h1 className="text-xl md:text-2xl">Room Name: {roomData.title}</h1>
+            <h1 className="text-xl md:text-2xl mt-4">
+              Created By: {roomData.name}
+            </h1>
           </div>
 
-          <p className="text-lg font-semibold text-black p-2">
-            Click to Copy the Poll Link and Share it to your Audience
+          <p className="text-md md:text-lg text-black p-2">
+            Share the link to your Audience
           </p>
+
           <button
-            className="flex gap-3 text-white bg-black px-3 mx-auto py-3 rounded-lg shadow-xl"
+            className="flex gap-3 text-white bg-black px-4 py-3 rounded-lg shadow-xl mx-auto"
             onClick={copyLink}
           >
             <IconCopy />
             Copy Link
           </button>
 
-          <label className="text-center text-violet-800 px-2 py-2 mt-6 font-bold text-2xl w-full block">
+          <label className="text-violet-800 px-2 py-4 font-bold text-xl md:text-2xl block">
             What would you like to ask your audience?
           </label>
 
           <input
             type="text"
             placeholder="Type your question here..."
-            className="px-4 py-3 bg-gray-200 rounded-md border-2 shadow-xl w-[35rem] block mx-auto text-black"
+            className="px-4 py-3 bg-gray-100 rounded-md border-2 shadow-xl w-full max-w-2xl mx-auto text-black"
             id="question"
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
           />
+
           <button
-            className="px-3 py-2 mt-4 text-white text-lg bg-violet-700 rounded-md font-bold"
+            className="px-4 py-3 mt-4 mb-4 text-white text-md bg-violet-700 rounded-md font-bold"
             onClick={askQuestion}
           >
             Send Question
           </button>
         </div>
 
-        <div className="bg-violet-200 text-violet-800 w-1/2 m-4 p-4 align-items rounded-lg">
-        {waiting ? (
-          <div className=" ">
-            <p className="font-semibold text-2xl p-2">Waiting for the reponse from the Audience...</p>
-            <img src="/ques.png" alt="waiting" className="rounded-full mx-auto bg-black" width={360} />
-          </div> 
-        ):(
-          <div>
-            <h1 className="px-2 py-2 bg-white text-violet-800 rounded-lg w-1/3 mx-auto font-semibold">
-              Audience Response
-            </h1>
-            <div
-              style={{ height: 350, width: 590 }}
-              className="bg-white p-2 rounded-lg mt-2"
-            >
-              <ReactWordcloud options={options} words={wordsList} />
+        <div className="w-full lg:w-1/2 bg-violet-200 text-violet-800 p-4 rounded-lg">
+          {waiting ? (
+            <div>
+              <p className="font-semibold text-lg md:text-2xl p-2">
+                Waiting for the response from the Audience...
+              </p>
+              <img
+                src="/ques.png"
+                alt="waiting"
+                className="rounded-full mx-auto bg-black"
+                width={250}
+              />
             </div>
-          </div>
-        )}
+          ) : (
+            <div>
+              <h1 className="px-2 py-2 bg-white text-violet-800 rounded-lg w-2/3 sm:w-1/3 mx-auto font-semibold">
+                Audience Response
+              </h1>
+              <div className="bg-white p-2 rounded-lg mt-2 w-full h-[350px]">
+                <ReactWordcloud options={options} words={wordsList} />
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -434,9 +444,8 @@ const Host = () => {
         <div className=" px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
           <div className="max-w-7xl mx-auto rounded-lg shadow-md">
             <video
-              className="w-full h-auto rounded-lg shadow-lg"
+              className="w-full h-auto max-h-[400px] object-cover rounded-lg shadow-lg"
               src="/Video.mp4"
-              alt="Features Image"
               muted
               loop
               autoPlay

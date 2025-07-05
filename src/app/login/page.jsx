@@ -4,31 +4,33 @@ import { useFormik } from "formik";
 import React from "react";
 import { IconCheck, IconLoader3 } from "@tabler/icons-react";
 import Link from "next/link";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const LoginSchema = Yup.object().shape({
-  
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
     .required("Password must be correct")
     .matches(/[a-z]/, "Lowercase letter is required")
     .matches(/[A-Z]/, "Uppercase letter is required")
-    .matches(/[0-9]/, "number is required")
-    .matches(/\W/, "Special Character is required")
-    .min(8, "Minimum 8 characters requied"),
+    .matches(/[0-9]/, "Number is required")
+    .matches(/\W/, "Special character is required")
+    .min(8, "Minimum 8 characters required"),
 });
 
 const Login = () => {
-  //intialization formik
+  const router = useRouter();
+
   const loginForm = useFormik({
     initialValues: {
       email: "",
       password: "",
-      
     },
-    oonSubmit: (values, { resetForm, setSubmitting }) => {
+    onSubmit: (values, { resetForm, setSubmitting }) => {
       axios
         .get("http://localhost:5000/user/getall", values)
-        .then((result) => {
+        .then(() => {
           toast.success("Login successfully");
           resetForm();
           router.push("/manage-room");
@@ -43,74 +45,85 @@ const Login = () => {
   });
 
   return (
-    <div className="flex bg-violet-300 h-screen">
+    <div className="flex flex-col md:flex-row min-h-screen bg-violet-300">
+      
       <div
-        className="bg-cover bg-center flex items-center justify-center w-full m-20 ml-32"
+        className="hidden md:block w-full lg:m-20 md:w-1/2 bg-cover bg-center"
         style={{ backgroundImage: "url('login-image.png')" }}
-      >
-      </div>
+      ></div>
 
-      <div className="flex justify-start items-center w-full mr-28">
+      {/* Form section */}
+      <div className="flex justify-start lg:mr-28 items-center w-full md:w-1/2 p-4">
         <form
           onSubmit={loginForm.handleSubmit}
-          className="justify-center items-center"
+          className="w-full max-w-md bg-white shadow-2xl px-8 py-10 rounded-lg"
         >
-          <div className="bg-white border-1 border-black  shadow-2xl  px-20 py-10 rounded-lg ">
-            <h1 className="text-4xl text-black font-bold text-center">Login</h1>
-            <p className="text-lg font-semibold text-violet-700 text-center mt-2">
-              to your account
-            </p>
-            <div className="mt-6">
-              <label className="block font-bold">Email:</label>
-              <input
-                className="rounded-full bg-gray-300 px-2 py-1 w-full"
-                id="email"
-                type="email"
-                onChange={loginForm.handleChange}
-                value={loginForm.values.email}
-              />
-              {loginForm.errors.email && loginForm.touched.email && (
-                  <p className=" text-xs text-red-600 mt-2" id="name-error">
-                    {loginForm.errors.email}
-                  </p>
-                )}
-              <label className="block font-bold mt-4">Password:</label>
-              
-              
-              <input
-                className=" rounded-full bg-gray-300 px-2 py-1 w-full"
-                id="password"
-                type="password"
-                onChange={loginForm.handleChange}
-                value={loginForm.values.password}
-              />
-              <Link
-                      className="inline-flex items-center gap-x-1 text-sm text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
-                      href="/forgetPassword"
-                    >
-                      Forgot password?
-              </Link>
-              <button
-                // className="bg-violet-700 block mt-4 text-white shadow-xl w-full rounded-lg font-xl font-bold px-2 py-2 w-fit"
-                className="w-full mt-4 shadow-xl rounded-lg font-xl font-bold px-2 py-2 inline-flex justify-center items-center gap-x-2 border border-transparent bg-violet-700 text-white hover:bg-violet-800 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                type="submit"
-                disabled={loginForm.isSubmitting}
-              >
-                {loginForm.isSubmitting ? (
-                    <IconLoader3 className="animate-spin" />
-                  ) : (
-                    <IconCheck />
-                  )}
-                  {loginForm.isSubmitting ? "Submitting..." : "Log In"}{" "}
-              </button>
-              <p className="text-center mt-4">
-                Not yet registered?
-                <a href="/signup" className="text-blue-700 ">
-                  SignUp
-                </a>
-              </p>
-            </div>
+          <h1 className="text-4xl font-bold text-center text-black">Login</h1>
+          <p className="text-lg font-semibold text-violet-700 text-center mt-2">
+            to your account
+          </p>
+
+          {/* Email */}
+          <div className="mt-6">
+            <label className="block font-bold">Email:</label>
+            <input
+              className="rounded-full bg-gray-300 px-4 py-2 w-full"
+              id="email"
+              type="email"
+              onChange={loginForm.handleChange}
+              value={loginForm.values.email}
+            />
+            {loginForm.errors.email && loginForm.touched.email && (
+              <p className="text-xs text-red-600 mt-1">{loginForm.errors.email}</p>
+            )}
           </div>
+
+          {/* Password */}
+          <div className="mt-4">
+            <label className="block font-bold">Password:</label>
+            <input
+              className="rounded-full bg-gray-300 px-4 py-2 w-full"
+              id="password"
+              type="password"
+              onChange={loginForm.handleChange}
+              value={loginForm.values.password}
+            />
+            {loginForm.errors.password && loginForm.touched.password && (
+              <p className="text-xs text-red-600 mt-1">{loginForm.errors.password}</p>
+            )}
+          </div>
+
+          {/* Forgot password link */}
+          <div className="text-right mt-2">
+            <Link
+              className="text-sm text-blue-600 hover:underline"
+              href="/forgetPassword"
+            >
+              Forgot password?
+            </Link>
+          </div>
+
+          {/* Submit button */}
+          <button
+            className="w-full mt-6 shadow-xl rounded-lg font-semibold px-4 py-2 flex justify-center items-center gap-x-2 bg-black text-white hover:bg-violet-800 transition"
+            type="submit"
+            disabled={loginForm.isSubmitting}
+          >
+            {loginForm.isSubmitting ? (
+              <IconLoader3 className="animate-spin" />
+            ) : (
+              <IconCheck />
+            )}
+            {loginForm.isSubmitting ? "Submitting..." : "Log In"}
+          </button>
+
+          {/* Sign up link */}
+          <p className="text-center mt-4 text-sm">
+            Not yet registered?{" "}
+            <Link href="/signup" className="text-blue-700 hover:underline">
+              Sign Up
+            </Link>
+          </p>
         </form>
       </div>
     </div>

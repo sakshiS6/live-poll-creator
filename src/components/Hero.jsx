@@ -287,10 +287,8 @@ const Hero = () => {
   return (
     <div>
       <>
-        
         <div className="bg-white mt-1 rounded-lg">
           <div className="max-w-[85rem] mx-auto sm:px-6 lg:px-8 py-12 px-8 ">
-           
             <div className="flex justify-center">
               <Link
                 className="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-sm text-gray-800 p-1 ps-3 rounded-full transition hover:border-gray-300 focus:outline-none focus:border-gray-300 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-200 dark:hover:border-neutral-600 dark:focus:border-neutral-600"
@@ -315,7 +313,7 @@ const Hero = () => {
                 </span>
               </Link>
             </div>
-           
+
             <div className="mt-6 max-w-2xl text-center mx-auto">
               <h1 className="block font-bold text-gray-800 text-4xl md:text-5xl lg:text-6xl dark:text-neutral-200">
                 Let's Create
@@ -324,7 +322,7 @@ const Hero = () => {
                 </span>
               </h1>
             </div>
-            
+
             <div className="mt-5 max-w-3xl text-center mx-auto">
               <p className="text-lg text-gray-600 dark:text-neutral-400">
                 PollCreator gives you the power to design a wide variety of
@@ -333,7 +331,7 @@ const Hero = () => {
                 dynamic and memorable.
               </p>
             </div>
-           
+
             <div className="mt-8 gap-3 flex justify-center">
               <Link
                 className="inline-flex text-lg justify-center items-center gap-x-3 text-center bg-violet-800 text-white border border-transparent rounded-md py-3 px-4"
@@ -364,17 +362,18 @@ const Hero = () => {
                 </Link>
               </button>
             </div>
-            <div className="flex border-1 border-black mt-6 ">
-              <div className="mx-auto bg-white text-violet-800 w-fit m-2 p-10 align-items rounded-lg">
-                <div style={{ height: 400, width: 600 }}>
+            <div className="mt-10 flex flex-col lg:flex-row items-center justify-center gap-8">
+              <div className="bg-white text-violet-800 w-full max-w-xl p-4 rounded-lg">
+                <div className="w-full h-[300px] sm:h-[400px]">
                   <ReactWordcloud options={options} words={words} />
                 </div>
               </div>
-              <div className="relative w-fit text-black mt-16 p-4  ml-16">
-                <h1 className="text-3xl text-center font-bold text-violet-800">
+
+              <div className="max-w-xl px-4 text-center lg:text-left">
+                <h1 className="text-4xl text-center sm:text-5xl font-bold text-violet-800">
                   Word Cloud
                 </h1>
-                <p className="text-lg text-gray-700 dark:text-neutral-400 text-center p-2 pt-8">
+                <p className="mt-4 text-lg sm:text-md text-gray-700 dark:text-neutral-400">
                   Create WordCloud to highlight popular poll responses. They’re
                   great for gathering input and wowing your classroom, meeting,
                   and workshop audiences! A word cloud is commonly used for
@@ -386,15 +385,13 @@ const Hero = () => {
                 </p>
               </div>
             </div>
-            
+
             <div>
               <>
-  
                 <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
-                  
                   <div className="grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-12 lg:items-center">
                     <div className="lg:col-span-3">
-                      <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-6xl dark:text-white">
+                      <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl mt-4 md:text-5xl lg:text-6xl dark:text-white">
                         You can ask Question
                       </h1>
                       <p className="mt-3 text-lg text-gray-800 dark:text-neutral-400">
@@ -406,7 +403,9 @@ const Hero = () => {
                           <label htmlFor="hero-input" className="sr-only">
                             Search
                           </label>
-                          <h1 className="text-black text-lg">Have any doubts? Feel free to ask!</h1>
+                          <h1 className="text-black text-lg">
+                            Have any doubts? Feel free to ask!
+                          </h1>
                         </div>
                         <Link
                           className="text-blue-500 underline text-md hover:text-blue-600 shadow-lg"
@@ -415,9 +414,8 @@ const Hero = () => {
                           Click Here
                         </Link>
                       </div>
-                      
                     </div>
-                  
+
                     <div className="lg:col-span-4 mt-10 lg:mt-0">
                       <img
                         className="w-full rounded-md"
@@ -425,16 +423,12 @@ const Hero = () => {
                         alt="Hero Image"
                       />
                     </div>
-                    
                   </div>
-                  
                 </div>
-                
               </>
             </div>
           </div>
         </div>
-        
       </>
     </div>
   );

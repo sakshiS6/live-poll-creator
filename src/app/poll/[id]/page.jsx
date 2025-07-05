@@ -1,14 +1,12 @@
 "use client";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
 const Poll = () => {
   const router = useRouter();
-  // const pollInput = useRef(null);
-
   const { id } = useParams();
 
   const [socket, setSocket] = useState(
@@ -24,7 +22,6 @@ const Poll = () => {
     socket.connect();
     const res = await axios.get("http://localhost:5000/room/getbyid/" + id);
     setAppear(true);
-    console.log(res.data);
     setRoomData(res.data);
     const { title } = res.data;
     socket.emit("join-room", title);
@@ -36,60 +33,67 @@ const Poll = () => {
 
   const sendResponse = () => {
     socket.emit("send-response", { roomName: roomData.title, response });
-    toast.success("Response sended successfully!");
+    toast.success("Response sent successfully!");
   };
 
   socket.on("get-question", (question) => {
     setCurrentQuestion(question);
-    console.log(question);
     setAppear(false);
   });
 
   if (roomData === null) {
-    return <h1>Loading poll details...</h1>;
+    return <h1 className="text-center mt-10 text-2xl">Loading poll details...</h1>;
   }
 
   return (
-    <div className="relative min-h-screen bg-violet-300 text-center p-4">
-      <h1 className="text-5xl mt-2 font-bold text-gray-900 dark:text-neutral-400 ">
-      Live Poll: Share Your Voice
+    <div className="relative min-h-screen bg-violet-300 text-center p-6">
+      <h1 className="text-3xl md:text-5xl mt-4 font-bold text-gray-900 dark:text-neutral-400">
+        Live Poll: Share Your Voice
       </h1>
-      <div >
-        <div className="mt-4 w-[85%] mx-auto text-3xl font-semibold flex bg-white px-4 py-3 rounded-lg">
-          Question : 
+
+      <div className="mt-6 mx-auto w-full max-w-5xl px-4">
+        
+        <div className=" bg-white px-4 py-3 rounded-lg text-left text-xl md:text-2xl font-semibold mb-6">
+          <span className="mr-2">Question:</span>
           {appear ? (
-            <h1 className="text-black">  Waiting for the Host to Set the Question...</h1>
+            <span className="text-black">
+              Waiting for the Host to Set the Question...
+            </span>
           ) : (
-            <h1 className="text-black">{currentQuestion}</h1>
+            <span className="text-black">{currentQuestion}</span>
           )}
         </div>
-        <div className="flex items-start justify-center gap-8">
-          {/* Image Section */}
+
+        
+        <div className="flex flex-col mt-4 md:flex-row items-center justify-center gap-8">
+          
           <img
             src="/response.png"
             alt="Poll Illustration"
-            className="w-1/3"
+            className="w-full md:w-1/2 max-w-sm rounded-lg shadow-lg"
           />
-        </div>
-        <div>
-          <label className="flex text-3xl font-bold justify-center mt-2 text-gray-900 dark:text-neutral">
-          Respond Now
-          </label>
-          <p className="p-2 text-xl font-semibold text-gray-900 dark:text-neutral">Respond with one word to add your voice to the poll. Let your word shape the conversation!</p>
-          <textarea
-            // ref={pollInput}
-            className="mt-2 bg-gray-50 px-5 py-4 rounded-lg text-black text-2xl w-2/3 h-auto"
-            placeholder="Type here..."
-            id="response"
-            value={response}
-            onChange={(e) => setResponse(e.target.value)}
-          ></textarea>
-          <button
-            className="block mx-auto font-semibold text-violet-700 bg-white px-2 py-2 mt-3 rounded-lg shadow-xl text-lg"
-            onClick={sendResponse}
-          >
-            Send Response
-          </button>
+
+          <div className="w-full md:w-1/2">
+            <label className="block text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+              Respond Now
+            </label>
+            <p className="text-base md:text-lg font-medium mb-3 text-gray-900">
+              Respond with one word to add your voice to the poll. Let your word shape the conversation!
+            </p>
+            <textarea
+              className="w-full h-32 md:h-28 bg-gray-50 px-4 py-3 rounded-lg text-black text-lg md:text-2xl resize-none"
+              placeholder="Type here..."
+              id="response"
+              value={response}
+              onChange={(e) => setResponse(e.target.value)}
+            ></textarea>
+            <button
+              className="w-full md:w-auto font-semibold text-violet-700 bg-white px-6 py-2 mt-4 rounded-lg shadow-xl text-base md:text-lg"
+              onClick={sendResponse}
+            >
+              Send Response
+            </button>
+          </div>
         </div>
       </div>
     </div>
