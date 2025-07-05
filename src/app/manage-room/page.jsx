@@ -29,7 +29,7 @@ const ManageRoom = () => {
 
   const fetchRoomList = async () => {
     setLoading(true);
-    const res = await axios.get("http://localhost:5000/room/getall");
+    const res = await axios.get("https://live-poll-backend-akq0.onrender.com/room/getall");
     console.log(res.data);
     setRoomList(res.data);
     setLoading(false);
@@ -43,7 +43,7 @@ const ManageRoom = () => {
 
     onSubmit: (values, { resetForm, setSubmitting }) => {
       axios
-        .post("http://localhost:5000/room/add", values)
+        .post("https://live-poll-backend-akq0.onrender.com/room/add", values)
         .then((result) => {
           toast.success("Room Created successfully!");
           resetForm();
@@ -65,7 +65,7 @@ const ManageRoom = () => {
   const deleteRoom = async (id) => {
     if (!confirm("Are you sure you want to delete this room")) return;
 
-    const res = await axios.delete(`http://localhost:5000/room/delete/${id}`);
+    const res = await axios.delete(`https://live-poll-backend-akq0.onrender.com/room/delete/${id}`);
     if (res.status === 200) {
       fetchRoomList();
       toast.success("Room Deleted Successfull");

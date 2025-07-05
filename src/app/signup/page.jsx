@@ -38,7 +38,7 @@ const Signup = () => {
     },
     onSubmit: (values, { resetForm, setSubmitting }) => {
       axios
-        .post("http://localhost:5000/user/add", values)
+        .post("https://live-poll-backend-akq0.onrender.com/user/add", values)
         .then((result) => {
           toast.success("User Registered successfully");
           resetForm();

@@ -10,7 +10,7 @@ const Poll = () => {
   const { id } = useParams();
 
   const [socket, setSocket] = useState(
-    io("http://localhost:5000", { autoConnect: false })
+    io("https://live-poll-backend-akq0.onrender.com", { autoConnect: false })
   );
 
   const [roomData, setRoomData] = useState(null);
@@ -20,7 +20,7 @@ const Poll = () => {
 
   const fetchRoomData = async () => {
     socket.connect();
-    const res = await axios.get("http://localhost:5000/room/getbyid/" + id);
+    const res = await axios.get("https://live-poll-backend-akq0.onrender.com/room/getbyid/" + id);
     setAppear(true);
     setRoomData(res.data);
     const { title } = res.data;

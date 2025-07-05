@@ -290,7 +290,7 @@ const Host = () => {
   const { id } = useParams();
 
   const [socket, setSocket] = useState(
-    io("http://localhost:5000", { autoConnect: false })
+    io("https://live-poll-backend-akq0.onrender.com", { autoConnect: false })
   );
 
   const [pollLink, setPollLink] = useState("");
@@ -308,7 +308,7 @@ const Host = () => {
 
   const copyLink = () => {
     navigator.clipboard
-      .writeText("http://localhost:3000/poll/" + id)
+      .writeText("https://live-poll-backend-akq0.onrender.com/poll/" + id)
       .then((result) => {
         toast.success("Link copied");
       })
@@ -319,7 +319,7 @@ const Host = () => {
   };
 
   const fetchRoomData = async () => {
-    const res = await axios.get("http://localhost:5000/room/getbyid/" + id);
+    const res = await axios.get("https://live-poll-backend-akq0.onrender.com/room/getbyid/" + id);
     console.log(res.data);
     setRoomData(res.data);
     const { title } = res.data;

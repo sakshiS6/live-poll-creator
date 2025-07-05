@@ -29,7 +29,7 @@ const Login = () => {
     },
     onSubmit: (values, { resetForm, setSubmitting }) => {
       axios
-        .get("http://localhost:5000/user/getall", values)
+        .get("https://live-poll-backend-akq0.onrender.com/user/getall", values)
         .then(() => {
           toast.success("Login successfully");
           resetForm();
